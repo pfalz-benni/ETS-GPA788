@@ -1,4 +1,6 @@
 {
     "sketch": "test_lcd/test_lcd.ino",
-    "board": "arduino:avr:uno"
+    "board": "arduino:avr:uno",
+    "port": "/dev/tty.usbmodem1101",
+    "output": ".\\build"
 }
