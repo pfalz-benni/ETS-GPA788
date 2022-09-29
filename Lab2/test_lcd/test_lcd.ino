@@ -21,7 +21,6 @@
  * de cours.
  */
 
-
 // Classe pour afficher des caractères à l'aide du LCD
 #include <LiquidCrystal.h>
 // Classe pour mesurer la température interne de l'ATmega328P
@@ -46,39 +45,35 @@ LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 dht DHT;
 
 /*Variables et Constantes*/
-double dht_temp, dht_humi; //Création de variables afin de stocker et afficher les valeurs du DHT11
-const int DHT11_PIN{7}; // Relier le capteur à la broche #7
+double dht_temp, dht_humi;     // Création de variables afin de stocker et afficher les valeurs du DHT11
+const int DHT11_PIN{7};        // Relier le capteur à la broche #7
 const int16_t NB_MSG_COUNT{2}; //
-
-
 
 /* ---------------------------------------------------------------
    Fonction d'initialisation obligatoire (exécutée 1 seule fois).
    --------------------------------------------------------------- */
 void setup()
 {
-  //Fixe le débit de communication en nombre de caracères par 
-  //seconde(baud) pour la communication série
-    Serial.begin(115200);
+   // Fixe le débit de communication en nombre de caracères par
+   // seconde(baud) pour la communication série
+   Serial.begin(115200);
 
-  // Sur le VS Code, l'ouverture du port série prend du temps et on
-  // peut perdre des caractères. Ce problème n'existe pas sur la carte
-  // de l'Arduino.
+   // Sur le VS Code, l'ouverture du port série prend du temps et on
+   // peut perdre des caractères. Ce problème n'existe pas sur la carte
+   // de l'Arduino.
 
-  // Attente de 2 secondes
-    waitUntil(2000);
+   // Attente de 2 secondes
+   waitUntil(2000);
 
-  // Pour l'afficheur LCD
-  // 0) Il s'agir d'un afficheur 16 x 2
-    lcd.begin(16, 2);
-  // 1) Effacer l'affichage
-    lcd.clear();
+   // Pour l'afficheur LCD
+   // 0) Il s'agir d'un afficheur 16 x 2
+   lcd.begin(16, 2);
+   // 1) Effacer l'affichage
+   lcd.clear();
 
-  // Lecture des données a jeter
-  // TODO
+   // Lecture des données a jeter
+   // TODO
 }
-
-
 
 /* ---------------------------------------------------------------
    Fonction principale
@@ -86,61 +81,61 @@ void setup()
    --------------------------------------------------------------- */
 void loop()
 {
-  // Alterner entre le message de bienvenue et les varibales du DHT11
-  // messageCount: nombre de fois le contenu a été affiché
-  // showingMessage: true -> bienvenue, false -> température, humidité
-     static int16_t messageCount{0};
-     static bool showingMessage{true};
+   // Alterner entre le message de bienvenue et les varibales du DHT11
+   // messageCount: nombre de fois le contenu a été affiché
+   // showingMessage: true -> bienvenue, false -> température, humidité
+   static int16_t messageCount{0};
+   static bool showingMessage{true};
 
-     int chk = DHT.read11(DHT11_PIN);
+   int chk = DHT.read11(DHT11_PIN);
 
-  // Traitement du code de retour pour voir s'il est ok
-     if (chk == DHTLIB_OK)
-    {
-     // Stockage des valeurs du DHT11
-        dht_humi = DHT.humidity;
-        dht_temp = DHT.temperature;
+   // Traitement du code de retour pour voir s'il est ok
+   if (chk == DHTLIB_OK)
+   {
+      // Stockage des valeurs du DHT11
+      dht_humi = DHT.humidity;
+      dht_temp = DHT.temperature;
 
-     // Si le compteur est à zéro alors change le contenu
-        if (messageCount == 0)
-        {
-         // 
-            lcd.clear();
-            if (showingMessage) 
-            {                           // était message de bienvenue? alors
-                showTemp((int)dht_temp, (int)dht_humi, lcd); // affiche la température interne.
-            }
-            else
-            {
-                welcome(lcd);
-            }
-        }
-     // Si le compteur est > NB_MSG_COUNT alors remettre le compteur
-     // à zéro et change le contenu de l'afficheur.
-        if (messageCount++ > NB_MSG_COUNT)
-        {
-            messageCount = 0;
-            showingMessage = !showingMessage;
-        }
-    }
+      // Si le compteur est à zéro alors change le contenu
+      if (messageCount == 0)
+      {
+         //
+         lcd.clear();
+         if (showingMessage)
+         {                                               // était message de bienvenue? alors
+            showTemp((int)dht_temp, (int)dht_humi, lcd); // affiche la température interne.
+         }
+         else
+         {
+            welcome(lcd);
+         }
+      }
+      // Si le compteur est > NB_MSG_COUNT alors remettre le compteur
+      // à zéro et change le contenu de l'afficheur.
+      if (messageCount++ > NB_MSG_COUNT)
+      {
+         messageCount = 0;
+         showingMessage = !showingMessage;
+      }
+   }
 
-    else
-    {
-        // Afficher message d'erreur
-        Serial.print(F("Error: "));
-        Serial.println(chk);
+   else
+   {
+      // Afficher message d'erreur
+      Serial.print(F("Error: "));
+      Serial.println(chk);
 
-        lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("Error: ");
-        lcd.print(chk, 10);
-    }
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Error: ");
+      lcd.print(chk, 10);
+   }
 
-    // Faire clignoter lentement l'afficheur
-    lcd.display();
-    waitUntil(2000);
-    lcd.noDisplay();
-    waitUntil(1000);
+   // Faire clignoter lentement l'afficheur
+   lcd.display();
+   waitUntil(2000);
+   lcd.noDisplay();
+   waitUntil(1000);
 }
 
 /* ---------------------------------------------------------------
@@ -151,11 +146,11 @@ void loop()
    --------------------------------------------------------------- */
 void waitUntil(uint32_t w)
 {
-  uint32_t t{millis()};
-  // Attendre w millisecondes
-  while (millis() < t + w)
-  {
-  }
+   uint32_t t{millis()};
+   // Attendre w millisecondes
+   while (millis() < t + w)
+   {
+   }
 }
 
 /* ---------------------------------------------------------------
@@ -165,13 +160,13 @@ void waitUntil(uint32_t w)
    --------------------------------------------------------------- */
 void welcome(LiquidCrystal &l)
 {
-  // D'abord le terminal série
-  Serial.println(F("Bienvenue au GPA788 OC/IoT"));
-  // Ensuite l'afficheur LCD
-  l.setCursor(0, 0);        // Cursuer à la 1ere colonne, 1ere ligne
-  l.print("Bienvenue au");  // Afficher le texte...
-  l.setCursor(0, 1);        // Curseur à la 1ere colonne, 2e ligne
-  l.print("GPA788 OC/IoT"); // Afficher le texte...}
+   // D'abord le terminal série
+   Serial.println(F("Bienvenue au GPA788 OC/IoT"));
+   // Ensuite l'afficheur LCD
+   l.setCursor(0, 0);        // Cursuer à la 1ere colonne, 1ere ligne
+   l.print("Bienvenue au");  // Afficher le texte...
+   l.setCursor(0, 1);        // Curseur à la 1ere colonne, 2e ligne
+   l.print("GPA788 OC/IoT"); // Afficher le texte...}
 }
 
 /* ---------------------------------------------------------------
@@ -181,23 +176,23 @@ void welcome(LiquidCrystal &l)
    --------------------------------------------------------------- */
 void showTemp(int temp, int humi, LiquidCrystal &l)
 {
-  // On afffiche les valeurs de la température et
-  // l'humidité sur le moniteur série
-  Serial.print(F("Temperature : "));
-  Serial.println(temp);
-  Serial.print(F("Humidite : "));
-  Serial.println(humi);
+   // On afffiche les valeurs de la température et
+   // l'humidité sur le moniteur série
+   Serial.print(F("Temperature : "));
+   Serial.println(temp);
+   Serial.print(F("Humidite : "));
+   Serial.println(humi);
 
-  // On afffiche les valeurs de la température et
-  // l'humidité sur lcd
-  l.setCursor(0, 0);
-  l.print("Temp.: ");
-  l.print(temp, 10);
-  l.print((char)223);
-  l.print("C");
-  
-  l.setCursor(0, 1);
-  l.print("Hum.: ");
-  l.print(humi, 10);
-  l.print("%");
+   // On afffiche les valeurs de la température et
+   // l'humidité sur lcd
+   l.setCursor(0, 0);
+   l.print("Temp.: ");
+   l.print(temp, 10);
+   l.print((char)223);
+   l.print("C");
+
+   l.setCursor(0, 1);
+   l.print("Hum.: ");
+   l.print(humi, 10);
+   l.print("%");
 }

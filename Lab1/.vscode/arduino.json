@@ -1,0 +1,4 @@
+{
+    "sketch": "test_lcd/test_lcd.ino",
+    "board": "arduino:avr:uno"
+}
