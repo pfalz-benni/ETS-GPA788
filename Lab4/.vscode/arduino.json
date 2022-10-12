@@ -1,5 +1,5 @@
 {
-    "sketch": "test_lcd/test_lcd.ino",
+    "sketch": "test_lcd/test_calculateur_Leq.ino",
     "board": "arduino:avr:uno",
     "port": "/dev/tty.usbmodem1401",
     "output": ".\\build"

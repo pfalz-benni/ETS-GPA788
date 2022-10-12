@@ -1,11 +1,12 @@
 #include "calculateur_li.h"
+#include <math.h>
 
 class Calculateur_Leq
 {
 private:
-    uint32_t m_ts;
-    uint16_t m_nbSample;
-    uint16_t m_nbLi;
+    uint32_t m_ts;       // Période d'échantillionnage (ms)
+    uint16_t m_nbSample; // Calculer le niveau sonore Li toutes les m_ts x m_nbSample ms => 2 secondes
+    uint16_t m_nbLi;     // Calculer le niveau de bruit équivalen Leq toutes les m_nbLi x 2 secondes => 5 minutes
 
     float m_Leq;
     Calculateur_Li d; // Initialized with standard parameters
@@ -30,26 +31,40 @@ public:
     /* -------------------------------------------------------------
        Accesseurs des données membres de la classe
        -------------------------------------------------------------- */
-    inline double GetLeq() const { return m_Leq; }
+    inline float GetLeq() const { return m_Leq; }
+    inline uint32_t GetTs() const { return m_ts; }
+    inline uint16_t GetVrmSamples() const { return m_nbSample; }
+    inline uint16_t GetLiSamples() const { return m_nbLi; }
 
     /* -------------------------------------------------------------
        Services publics offerts
        -------------------------------------------------------------- */
+
     // Utiliser Accumulate() de l'objet de classe Calculateur_VRMS
     // pour accumuler les valeurs du capteur sonore.
-    // Note: La temporisation est la responsabilité de l'utilisateur.
+    // Note: La temporisation est reglé dans la fonction (p. 25 - 26). // TODO
     void Accumulate()
     {
         d.Accumulate();
     }
-    // Utiliser Compute() de l'objet de classe Calculateur_VRMS
-    // pour calculer la valeur rms du signal sonore et ensuite
-    // calculer Li du signal.
-    // Note: La temporisation est la responsabilité de l'utilisateur.
-    double Compute()
+
+    // Utiliser Compute() de l'objet de classe Calculateur_Li
+    // pour calculer la valeur Li et ensuite calculer Leq du signal.
+    // Note: La temporisation est reglé dans la fonction (p. 25 - 26). // TODO
+    float Compute()
     {
-        d.Compute();
-        // m_Leg = // TODO
+        uint32_t ti = m_ts * m_nbSample;
+        uint32_t tp = m_ts * m_nbSample * m_nbLi;
+        float sum = 0;
+
+        // TODO Timing: toutes les ti = m_ts x m_nbSample ms
+        for (uint32_t i = 0; i < m_nbSample; ++i)
+        {
+            d.Compute();
+            sum += ti * pow(10, 0.1 * d.GetLi());
+        }
+
+        m_Leq = 10 * log10(1 / tp * sum);
         return m_Leq;
     }
 };
