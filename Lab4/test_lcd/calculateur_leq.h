@@ -45,26 +45,43 @@ public:
     // Note: La temporisation est reglé dans la fonction (p. 25 - 26). // TODO
     void Accumulate()
     {
-        d.Accumulate();
+        static unsigned long start = millis();
+        if (millis() - start >= m_ts)
+        {
+            d.Accumulate();
+            start = millis();
+        }
     }
 
     // Utiliser Compute() de l'objet de classe Calculateur_Li
     // pour calculer la valeur Li et ensuite calculer Leq du signal.
     // Note: La temporisation est reglé dans la fonction (p. 25 - 26). // TODO
-    float Compute()
+    bool Compute()
     {
-        uint32_t ti = m_ts * m_nbSample;
-        uint32_t tp = m_ts * m_nbSample * m_nbLi;
-        float sum = 0;
+        static uint32_t nb_li_count = 0;
+        static float sum = 0;
 
-        // TODO Timing: toutes les ti = m_ts x m_nbSample ms
-        for (uint32_t i = 0; i < m_nbSample; ++i)
+        if (d.GetNbSamples() == m_nbSample)
         {
-            d.Compute();
-            sum += ti * pow(10, 0.1 * d.GetLi());
+            // Timing: toutes les ti = m_ts x m_nbSample ms
+            if (d.GetNbSamples() == m_nbSample)
+            {
+                d.Compute();
+                float ti = m_ts * m_nbSample;
+                sum += ti * pow(10.0, 0.1 * d.GetLi());
+                ++nb_li_count;
+            }
         }
 
-        m_Leq = 10 * log10(1 / tp * sum);
-        return m_Leq;
+        if (nb_li_count == m_nbLi)
+        {
+            float tp = m_ts * m_nbSample * m_nbLi;
+            
+            m_Leq = 10.0 * log10(1.0 / tp * sum);
+            nb_li_count = 0;
+            sum = 0;
+            return true;
+        }
+        return false;
     }
 };
