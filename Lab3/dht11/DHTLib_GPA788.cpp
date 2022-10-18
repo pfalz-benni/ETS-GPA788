@@ -1,3 +1,27 @@
+/*
+ * DHTLib_GPA788.c
+ * Mise à jour du code de Rob Tillaart en utilisant le C++ moderne.
+ * 
+ * Auteurs : Philippe Boivin, Sandrine Bouchard, Alexandre Lins-d'Auteuil,
+ * Benedikt Franz Witteler
+ * 
+ * Dans le cadre du cours :
+ * GPA788 - ETS
+ * T. Wong
+ * 10-2019
+ * 07-2020
+ *
+ * Le code est la création de Rob Tillaart voir les commentaires
+ * ci-dessous.
+ */
+//
+//    FILE: dht.cpp
+//  AUTHOR: Rob Tillaart
+// VERSION: 0.1.14
+// PURPOSE: DHT Temperature & Humidity Sensor library for Arduino
+//     URL: http://arduino.cc/playground/Main/DHTLib
+//
+
 #include "DHTLib_GPA788.h"
 
 bool dhtlib_gpa788::isConnected11() {

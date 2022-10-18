@@ -1,6 +1,6 @@
 {
-    "sketch": "test_lcd/test_lcd.ino",
+    "sketch": "dht11/dht11.ino",
     "board": "arduino:avr:uno",
-    "port": "/dev/tty.usbmodem1401",
+    "port": "/dev/tty.usbmodem1301",
     "output": ".\\build"
 }
