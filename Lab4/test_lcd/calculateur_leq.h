@@ -1,3 +1,20 @@
+/*
+ * Calculateur_Li
+ *
+ * Une classe pour calculer Leq, le niveau d'énergie sonore équivalent
+ * pour une durée déterminé, à l'aide des classes Calculateur_Li et
+ * Calculateur_VRMS.
+ *
+ * Auteurs : Philippe Boivin, Sandrine Bouchard, Alexandre Lins-d'Auteuil,
+ * Benedikt Franz Witteler
+ *
+ * Dans le cadre du cours :
+ * GPA788 - ETS
+ * T. Wong
+ * 10-2019
+ * 07-2020
+ */
+
 #include "calculateur_li.h"
 #include <math.h>
 
@@ -12,7 +29,7 @@ private:
     Calculateur_Li d; // Initialized with standard parameters
 
 public:
-    Calculateur_Leq(const uint32_t ts, const uint16_t nbSample, const uint16_t nbLi) // TODO which parameters
+    Calculateur_Leq(const uint32_t ts, const uint16_t nbSample, const uint16_t nbLi)
         : m_ts(ts), m_nbSample(nbSample), m_nbLi(nbLi)
     {
     }
@@ -40,9 +57,11 @@ public:
        Services publics offerts
        -------------------------------------------------------------- */
 
-    // Utiliser Accumulate() de l'objet de classe Calculateur_VRMS
-    // pour accumuler les valeurs du capteur sonore.
-    // Note: La temporisation est reglé dans la fonction (p. 25 - 26). // TODO
+    /**
+     * @brief Utiliser Accumulate() de l'objet de classe Calculateur_VRMS
+     * pour accumuler les valeurs du capteur sonore.
+     * Note: La temporisation est reglé dans la fonction (p. 25 - 26).
+     */
     void Accumulate()
     {
         static unsigned long start = millis();
@@ -53,30 +72,29 @@ public:
         }
     }
 
-    // Utiliser Compute() de l'objet de classe Calculateur_Li
-    // pour calculer la valeur Li et ensuite calculer Leq du signal.
-    // Note: La temporisation est reglé dans la fonction (p. 25 - 26). // TODO
+    /**
+     * @brief Utiliser Compute() de l'objet de classe Calculateur_Li
+     * pour calculer la valeur Li et ensuite calculer Leq du signal.
+     * Note: La temporisation est reglé dans la fonction (p. 25 - 26).
+     */
     bool Compute()
     {
         static uint32_t nb_li_count = 0;
         static float sum = 0;
 
+        // Timing: toutes les ti = m_ts x m_nbSample ms
         if (d.GetNbSamples() == m_nbSample)
         {
-            // Timing: toutes les ti = m_ts x m_nbSample ms
-            if (d.GetNbSamples() == m_nbSample)
-            {
-                d.Compute();
-                float ti = m_ts * m_nbSample;
-                sum += ti * pow(10.0, 0.1 * d.GetLi());
-                ++nb_li_count;
-            }
+            d.Compute();
+            float ti = m_ts * m_nbSample;
+            sum += ti * pow(10.0, 0.1 * d.GetLi());
+            ++nb_li_count;
         }
 
         if (nb_li_count == m_nbLi)
         {
             float tp = m_ts * m_nbSample * m_nbLi;
-            
+
             m_Leq = 10.0 * log10(1.0 / tp * sum);
             nb_li_count = 0;
             sum = 0;
