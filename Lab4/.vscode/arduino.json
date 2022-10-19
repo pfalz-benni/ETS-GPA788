@@ -1,5 +1,5 @@
 {
-    "sketch": "test_lcd/test_calculateur_Leq.ino",
+    "sketch": "leq/test_calculateur_Leq.ino",
     "board": "arduino:avr:uno",
     "port": "/dev/tty.usbserial-1110",
     "output": ".\\build"
