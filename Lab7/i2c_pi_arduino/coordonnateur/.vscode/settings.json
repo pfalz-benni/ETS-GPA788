@@ -1,0 +1,11 @@
+{   // Réglages VSC Python dans le cadre du cours GPA788
+    "python.linting.pylintEnabled": false,
+    // Dorénavant on utilisera Pylance au lieu de pylint.
+    "python.linting.enabled": true,
+    "python.pythonPath": "/bin/python3",
+    // Pour afficher les caractères accentués sur le terminal intégéré de VSC.
+    // Ce réglage ne s'applique que pour le terminal bash.
+    "terminal.integrated.env.linux": {
+        "LC_ALL": "en_CA.UTF-8"
+    }
+}

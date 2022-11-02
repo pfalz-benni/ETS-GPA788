@@ -1,0 +1,6 @@
+{
+    "sketch": "ex_i2cA.ino",
+    "board": "arduino:avr:uno",
+    "port": "/dev/tty.usbserial-110",
+    "output": ".\\build"
+}

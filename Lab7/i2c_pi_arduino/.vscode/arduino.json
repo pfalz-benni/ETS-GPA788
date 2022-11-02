@@ -1,0 +1,5 @@
+{
+    "sketch": "ex_i2cA/ex_i2cA.ino",
+    "board": "arduino:avr:uno",
+    "port": "/dev/tty.usbmodem1101"
+}

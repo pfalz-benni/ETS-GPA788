@@ -1,0 +1,6 @@
+{
+    "sketch": "ex_i2cB.ino",
+    "board": "arduino:avr:uno",
+    "port": "/dev/tty.usbmodem1201",
+    "output": ".\\build"
+}
