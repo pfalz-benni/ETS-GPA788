@@ -1,5 +1,6 @@
 {
     "sketch": "i2c_DHT11/i2c_DHT11.ino",
     "board": "arduino:avr:uno",
-    "port": "/dev/tty.usbserial-110"
+    "port": "/dev/tty.usbserial-1110",
+    "output": ".\\build"
 }

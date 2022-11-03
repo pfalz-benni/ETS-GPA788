@@ -22,23 +22,29 @@
  */
 #include <Wire.h>                // Pour la communication I2C
 #include <util/atomic.h>         // Pour la section critique
-#include "DHTLib_GPA788.h" // Pour lire la température du DHT11
+#include "calculateur_leq.h"     // Pour lire Leq sur Arduino
 
 /* ------------------------------------------------------------------
    Globales pour la classe dhtlib_gpa788
    ------------------------------------------------------------------ */
 
 // Relier le capteur à la broche #7
-const int DHT11_PIN{7};
+const int DHT11_PIN{7}; //DEL
+
+const uint32_t TS = 62;                     // Péruide d'échantillionnage (ms)
+const uint16_t NB_SAMPLE = 32;              // 32 x 62 ms ~ 2 secondes
+const uint16_t NB_LI = 150;                  // 150 x 2 secondes = 5 minutes (*)
+uint32_t countMillis;                       // Compter les minutes (pour debug seulement)
 
 // Créer un objet de type dht
-dhtlib_gpa788 dht(DHT11_PIN);
+dhtlib_gpa788 dht(DHT11_PIN); //DEL
+Calculateur_Leq leq(TS, NB_SAMPLE, NB_LI);
 
 /* ------------------------------------------------------------------
    Globales pour la communication I2C
    ------------------------------------------------------------------ */
 const uint8_t ADR_NOEUD{0x44}; // Adresse I2C de ce noeud
-const uint8_t NB_REGISTRES{11}; // Nombre de registres de ce noeud
+const uint8_t NB_REGISTRES{7}; // Nombre de registres de ce noeud
 
 /* La carte des registres ------------------------------------------- */
 union CarteRegistres
@@ -51,11 +57,9 @@ union CarteRegistres
     volatile uint8_t Ts;
     // Nombre d'échantillons (2 octets)
     volatile int16_t nb_echantillons;
-    // Température mesuréee par le DHT11 en celsius
+    // Leq mesuréee par sur l'Arduino
     // (4 octets)
     volatile float Leq;
-    // Humidité mesuréee par le DHT11 (4 octets)
-    volatile float humidite;
   } champs;
   // Ce tableau: Utilisé par le coordonnateur pour lire et écrire
   //             des données.
@@ -70,8 +74,7 @@ enum class CMD
 // TODO En ajouter 2
 
 union CarteRegistres cr; // Une carte des registres
-float Leq;       // Variable intermédiaire pour mémoriser la température
-float humidite;          // Variable intermédiaire pour mémoriser la humidite
+float Leq;                // Variable intermédiaire pour mémoriser la Leq
 uint8_t adrReg;          // Adresse du registre reçue du coordonnateur
 
 volatile CMD cmd;           // Go -> échantilloner, Stop -> arrêter
@@ -95,12 +98,7 @@ void setup()
   cr.champs.Ts = MIN_Ts;
   cr.champs.nb_echantillons = 0;
   cr.champs.Leq = -1;
-  cr.champs.humidite = -1;
   Leq = -1;
-  humidite = -1;
-
-  // Lecture des données a jeter
-  dht.reset11();
 
   // Initialiser les variables de contrôle de la
   // communication I2C
@@ -124,26 +122,29 @@ void setup()
    ------------------------------------------------------------------ */
 void loop()
 {
-  // Échantillonner la température interne si la commande est Go
+  // L'objet leq "sait" à quel moment il doit accumuler les valeurs
+  // du signal sonore. Accumulate est applé toujours alors
+  leq.Accumulate();
+  // L'objet leq sait à quels moments il faut calculer Vrms, Li et Leq
+  if (leq.Compute() ) {
+    Serial.print(leq.GetLeq(), 3); Serial.print(F("\t\t\t"));
+    Serial.println((1.0 * millis() - countMillis) / 60000);
+    countMillis = millis();
+  }
+
+  // Lire Leq interne si la commande est Go
   if (cmd == CMD::Go)
   {
-    DHTLIB_ErrorCode chk = dht.read11(); // TODO Tread return code
-    Leq = dht.getTemperature();
-    humidite = dht.getHumidity();
-
-    Serial.print("Temp.:");
-    Serial.println(Leq);
+    Leq = leq.GetLeq();
 
     // Section critique: empêcher les interruptions lors de l'assignation
-    // de la valeur de la température à la variable dans la carte des registres.
+    // de la valeur de Leq à la variable dans la carte des registres.
     // Recommandation: réaliser la tâche la plus rapidement que possible dans
     //                 la section critique.
     ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
     {
-      // Assigner la température lue dans cr.champs.temperature
+      // Assigner Leq lue dans cr.champs.Leq
       cr.champs.Leq = Leq;
-      // Assigner la humidite lue dans cr.champs.temperature
-      cr.champs.humidite = humidite;
       // Augmenter le compte du nombre d'échantillons
       cr.champs.nb_echantillons++;
     }
