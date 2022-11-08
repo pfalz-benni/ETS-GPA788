@@ -20,8 +20,8 @@
  *  08/2020
  *  11/2021
  */
-#include <Wire.h>                // Pour la communication I2C
-#include <util/atomic.h>         // Pour la section critique
+#include <Wire.h>          // Pour la communication I2C
+#include <util/atomic.h>   // Pour la section critique
 #include "DHTLib_GPA788.h" // Pour lire la température du DHT11
 
 /* ------------------------------------------------------------------
@@ -37,7 +37,7 @@ dhtlib_gpa788 dht(DHT11_PIN);
 /* ------------------------------------------------------------------
    Globales pour la communication I2C
    ------------------------------------------------------------------ */
-const uint8_t ADR_NOEUD{0x44}; // Adresse I2C de ce noeud
+const uint8_t ADR_NOEUD{0x44};  // Adresse I2C de ce noeud
 const uint8_t NB_REGISTRES{11}; // Nombre de registres de ce noeud
 
 /* La carte des registres ------------------------------------------- */
@@ -53,7 +53,7 @@ union CarteRegistres
     volatile int16_t nb_echantillons;
     // Température mesuréee par le DHT11 en celsius
     // (4 octets)
-    volatile float Leq;
+    volatile float temperature;
     // Humidité mesuréee par le DHT11 (4 octets)
     volatile float humidite;
   } champs;
@@ -70,7 +70,7 @@ enum class CMD
 // TODO En ajouter 2
 
 union CarteRegistres cr; // Une carte des registres
-float Leq;       // Variable intermédiaire pour mémoriser la température
+float temperature;       // Variable intermédiaire pour mémoriser la température
 float humidite;          // Variable intermédiaire pour mémoriser la humidite
 uint8_t adrReg;          // Adresse du registre reçue du coordonnateur
 
@@ -86,6 +86,9 @@ void setup()
   // Pour la communication série
   Serial.begin(115200);
 
+  // Lecture des données a jeter
+  dht.reset11();
+
   // Sur le VS Code, l'ouverture du port série prend du temps et on
   // peut perdre des caractères. Ce problème n'existe pas sur l'IDE
   // de l'Arduino.
@@ -94,13 +97,10 @@ void setup()
   // Initialiser les champs de la carte des registres
   cr.champs.Ts = MIN_Ts;
   cr.champs.nb_echantillons = 0;
-  cr.champs.Leq = -1;
+  cr.champs.temperature = -1;
   cr.champs.humidite = -1;
-  Leq = -1;
+  temperature = -1;
   humidite = -1;
-
-  // Lecture des données a jeter
-  dht.reset11();
 
   // Initialiser les variables de contrôle de la
   // communication I2C
@@ -127,12 +127,19 @@ void loop()
   // Échantillonner la température interne si la commande est Go
   if (cmd == CMD::Go)
   {
-    DHTLIB_ErrorCode chk = dht.read11(); // TODO Tread return code
-    Leq = dht.getTemperature();
-    humidite = dht.getHumidity();
+    DHTLIB_ErrorCode chk = dht.read11();
+    if (chk == DHTLIB_ErrorCode::DHTLIB_OK)
+    {
+      Serial.println("Lecture du DHT11 avec succès");
+    }
+    else
+    {
+      Serial.print("ERROR pendant la lecture du DHT11 avec code: ");
+      Serial.println(static_cast<int>(chk));
+    }
 
-    Serial.print("Temp.:");
-    Serial.println(Leq);
+    temperature = dht.getTemperature();
+    humidite = dht.getHumidity();
 
     // Section critique: empêcher les interruptions lors de l'assignation
     // de la valeur de la température à la variable dans la carte des registres.
@@ -141,7 +148,7 @@ void loop()
     ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
     {
       // Assigner la température lue dans cr.champs.temperature
-      cr.champs.Leq = Leq;
+      cr.champs.temperature = temperature;
       // Assigner la humidite lue dans cr.champs.temperature
       cr.champs.humidite = humidite;
       // Augmenter le compte du nombre d'échantillons
@@ -149,8 +156,10 @@ void loop()
     }
     Serial.print(F("#"));
     Serial.print(cr.champs.nb_echantillons);
-    Serial.print(F("  "));
-    Serial.println(cr.champs.Leq);
+    Serial.print(F("  T:"));
+    Serial.println(cr.champs.temperature);
+    Serial.print(F("    H:"));
+    Serial.println(cr.champs.humidite);
 
     // Attendre la prochaine période d'échantillonnage
     waitUntil(cr.champs.Ts * 1000);
@@ -195,7 +204,7 @@ void i2c_receiveEvent(int n)
         adrReg = -1; // Il y sans doute une erreur!
     }
   }
-  else if (n == 2)
+  else if (n == 2) // TODO make command 0xA0 consistent in struct
   {
     // Deux octets reçus. C'est probablement pour changer le
     // taux d'échantillonnage.

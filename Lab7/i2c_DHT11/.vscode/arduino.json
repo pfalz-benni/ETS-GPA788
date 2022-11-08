@@ -1,3 +1,5 @@
 {
-    "port": "/dev/tty.usbmodem11301"
+    "port": "/dev/tty.usbmodem11201",
+    "board": "arduino:avr:uno",
+    "sketch": "i2c_DHT11.ino"
 }
