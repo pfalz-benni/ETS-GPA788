@@ -20,24 +20,24 @@
  *  08/2020
  *  11/2021
  */
-#include <Wire.h>                // Pour la communication I2C
-#include <util/atomic.h>         // Pour la section critique
-#include "calculateur_leq.h"     // Pour lire Leq sur Arduino
+#include <Wire.h>            // Pour la communication I2C
+#include <util/atomic.h>     // Pour la section critique
+#include "calculateur_leq.h" // Pour lire Leq sur Arduino
 
 /* ------------------------------------------------------------------
    Globales pour la classe dhtlib_gpa788
    ------------------------------------------------------------------ */
 
 // Relier le capteur à la broche #7
-const int DHT11_PIN{7}; //DEL
+const int DHT11_PIN{7}; // DEL
 
-const uint32_t TS = 62;                     // Péruide d'échantillionnage (ms)
-const uint16_t NB_SAMPLE = 32;              // 32 x 62 ms ~ 2 secondes
-const uint16_t NB_LI = 150;                  // 150 x 2 secondes = 5 minutes (*)
-uint32_t countMillis;                       // Compter les minutes (pour debug seulement)
+const uint32_t TS = 62;        // Péruide d'échantillionnage (ms)
+const uint16_t NB_SAMPLE = 32; // 32 x 62 ms ~ 2 secondes
+const uint16_t NB_LI = 150;    // 150 x 2 secondes = 5 minutes (*)
+uint32_t countMillis;          // Compter les minutes (pour debug seulement)
 
 // Créer un objet de type dht
-dhtlib_gpa788 dht(DHT11_PIN); //DEL
+dhtlib_gpa788 dht(DHT11_PIN); // DEL
 Calculateur_Leq leq(TS, NB_SAMPLE, NB_LI);
 
 /* ------------------------------------------------------------------
@@ -74,7 +74,7 @@ enum class CMD
 // TODO En ajouter 2
 
 union CarteRegistres cr; // Une carte des registres
-float Leq;                // Variable intermédiaire pour mémoriser la Leq
+float Leq;               // Variable intermédiaire pour mémoriser la Leq
 uint8_t adrReg;          // Adresse du registre reçue du coordonnateur
 
 volatile CMD cmd;           // Go -> échantilloner, Stop -> arrêter
@@ -122,19 +122,21 @@ void setup()
    ------------------------------------------------------------------ */
 void loop()
 {
-  // L'objet leq "sait" à quel moment il doit accumuler les valeurs
-  // du signal sonore. Accumulate est applé toujours alors
-  leq.Accumulate();
-  // L'objet leq sait à quels moments il faut calculer Vrms, Li et Leq
-  if (leq.Compute() ) {
-    Serial.print(leq.GetLeq(), 3); Serial.print(F("\t\t\t"));
-    Serial.println((1.0 * millis() - countMillis) / 60000);
-    countMillis = millis();
-  }
-
   // Lire Leq interne si la commande est Go
   if (cmd == CMD::Go)
   {
+    // L'objet leq "sait" à quel moment il doit accumuler les valeurs
+    // du signal sonore. Accumulate est applé toujours alors
+    leq.Accumulate();
+    // L'objet leq sait à quels moments il faut calculer Vrms, Li et Leq
+    if (leq.Compute())
+    {
+      Serial.print(leq.GetLeq(), 3);
+      Serial.print(F("\t\t\t"));
+      Serial.println((1.0 * millis() - countMillis) / 60000);
+      countMillis = millis();
+    }
+
     Leq = leq.GetLeq();
 
     // Section critique: empêcher les interruptions lors de l'assignation
