@@ -99,7 +99,7 @@ void setup()
 
   // Initialiser les variables de contrôle de la
   // communication I2C
-  cmd = CMD::Go; // TODO Undo
+  cmd = CMD::Stop;
   adrReg = -1;
   // Réglage de la bibliothèque Wire pour le I2C
   Wire.begin(ADR_NOEUD);
