@@ -24,26 +24,23 @@
 #include <util/atomic.h>     // Pour la section critique
 #include "calculateur_leq.h" // Pour lire Leq sur Arduino
 
-/* ------------------------------------------------------------------
-   Globales pour la classe dhtlib_gpa788
-   ------------------------------------------------------------------ */
+#include "wait.h"
 
-// Relier le capteur à la broche #7
-const int DHT11_PIN{7}; // DEL
+/* ------------------------------------------------------------------
+   Globales pour la classe Calculateur_Leq
+   ------------------------------------------------------------------ */
 
 const uint32_t TS = 62;        // Péruide d'échantillionnage (ms)
 const uint16_t NB_SAMPLE = 32; // 32 x 62 ms ~ 2 secondes
-const uint16_t NB_LI = 150;    // 150 x 2 secondes = 5 minutes (*)
-uint32_t countMillis;          // Compter les minutes (pour debug seulement)
+const uint16_t NB_LI = 10;     // 150 x 2 secondes = 5 minutes (*) // TODO Reset to 150
 
-// Créer un objet de type dht
-dhtlib_gpa788 dht(DHT11_PIN); // DEL
+// Créer un objet de type Leq
 Calculateur_Leq leq(TS, NB_SAMPLE, NB_LI);
 
 /* ------------------------------------------------------------------
    Globales pour la communication I2C
    ------------------------------------------------------------------ */
-const uint8_t ADR_NOEUD{0x44}; // Adresse I2C de ce noeud
+const uint8_t ADR_NOEUD{0x45}; // Adresse I2C de ce noeud
 const uint8_t NB_REGISTRES{7}; // Nombre de registres de ce noeud
 
 /* La carte des registres ------------------------------------------- */
@@ -102,7 +99,7 @@ void setup()
 
   // Initialiser les variables de contrôle de la
   // communication I2C
-  cmd = CMD::Stop;
+  cmd = CMD::Go; // TODO Undo
   adrReg = -1;
   // Réglage de la bibliothèque Wire pour le I2C
   Wire.begin(ADR_NOEUD);
@@ -122,41 +119,40 @@ void setup()
    ------------------------------------------------------------------ */
 void loop()
 {
-  // Lire Leq interne si la commande est Go
+  // Lire Leq interne si la commande est Go et le temps cr.champs.Ts
+  // est écoulé depuis la dernière lecutre
+  static unsigned long start = millis();
+
   if (cmd == CMD::Go)
   {
     // L'objet leq "sait" à quel moment il doit accumuler les valeurs
     // du signal sonore. Accumulate est applé toujours alors
     leq.Accumulate();
     // L'objet leq sait à quels moments il faut calculer Vrms, Li et Leq
-    if (leq.Compute())
+    leq.Compute();
+
+    if (millis() - start >= cr.champs.Ts * 1000)
     {
-      Serial.print(leq.GetLeq(), 3);
-      Serial.print(F("\t\t\t"));
-      Serial.println((1.0 * millis() - countMillis) / 60000);
-      countMillis = millis();
+      start = millis();
+
+      Leq = leq.GetLeq();
+
+      // Section critique: empêcher les interruptions lors de l'assignation
+      // de la valeur de Leq à la variable dans la carte des registres.
+      // Recommandation: réaliser la tâche la plus rapidement que possible dans
+      //                 la section critique.
+      ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+      {
+        // Assigner Leq lue dans cr.champs.Leq
+        cr.champs.Leq = Leq;
+        // Augmenter le compte du nombre d'échantillons
+        cr.champs.nb_echantillons++;
+      }
+      Serial.print(F("#"));
+      Serial.print(cr.champs.nb_echantillons);
+      Serial.print(F("  "));
+      Serial.println(cr.champs.Leq);
     }
-
-    Leq = leq.GetLeq();
-
-    // Section critique: empêcher les interruptions lors de l'assignation
-    // de la valeur de Leq à la variable dans la carte des registres.
-    // Recommandation: réaliser la tâche la plus rapidement que possible dans
-    //                 la section critique.
-    ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-    {
-      // Assigner Leq lue dans cr.champs.Leq
-      cr.champs.Leq = Leq;
-      // Augmenter le compte du nombre d'échantillons
-      cr.champs.nb_echantillons++;
-    }
-    Serial.print(F("#"));
-    Serial.print(cr.champs.nb_echantillons);
-    Serial.print(F("  "));
-    Serial.println(cr.champs.Leq);
-
-    // Attendre la prochaine période d'échantillonnage
-    waitUntil(cr.champs.Ts * 1000);
   }
 }
 
