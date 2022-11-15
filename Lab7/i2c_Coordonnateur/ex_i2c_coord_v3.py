@@ -310,9 +310,7 @@ def main():
 
       # 4.5) Afficher les données reçues à la sortie standard
       print("\n<Temps: ", temps, ">")
-      print(read_Hum(bus,cst.I2C_ADDRESS[0]))
-      print(read_Temp(bus,cst.I2C_ADDRESS[0]))
-      print(read_Leq(bus,cst.I2C_ADDRESS[1]))
+    
       print("Noeud: {0}, Échantillon: {1}, Température: {2:.2f},  Humidity: {3:.2f}".format(hex(cst.I2C_ADDRESS[0]),
       Sensor_Data[cst.I2C_ADDRESS[0]]['Sample_Num'], Sensor_Data[cst.I2C_ADDRESS[0]]['Temperature'],Sensor_Data[cst.I2C_ADDRESS[0]]['Humidity']))
       print("Noeud: {0}, Échantillon: {1}, Leq: {2:.2f}".format(hex(cst.I2C_ADDRESS[1]),
