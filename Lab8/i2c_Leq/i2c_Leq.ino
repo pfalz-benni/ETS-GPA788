@@ -242,7 +242,7 @@ void i2c_receiveEvent(int n)
       Serial.println(F("Commande 'Pause' reçue"));
       uint8_t pauseTimeSec = data2;
       Serial.print(F("Mettre Arduino en pause pendant : "));
-      Serial.print(cr.champs.Ts);
+      Serial.print(pauseTimeSec);
       Serial.println(F(" secondes"));
 
       wakeUpTime = millis() + pauseTimeSec * 1000;

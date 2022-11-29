@@ -1,0 +1,268 @@
+[Starting] Opening the serial port - /dev/tty.usbserial-130
+Noeud à l'adresse 0x45 prêt à recevoir des commandes
+commande 'Arrêter' reçue
+Commande 'Changer Ts' reçue
+La nouvelle valeur est: 6 secondes
+Commande 'Démarrer' reçue
+#1  0.00
+#2  0.00
+#3  0.00
+#4  0.00
+#5  71.61
+#6  71.61
+#7  71.61
+#8  68.70
+#9  68.70
+#10  68.70
+#11  65.18
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 6 secondes
+Redémarrer Arduino après pause
+#12  65.18
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 6 secondes
+Redémarrer Arduino après pause
+#13  65.18
+#14  65.18
+#15  65.18
+#16  69.29
+commande 'Reset' reçue
+#1  69.29
+#2  69.29
+#3  69.29
+#4  70.27
+#5  70.27
+#6  70.27
+#7  70.27
+#8  67.12
+#9  67.12
+#10  67.12
+#11  67.12
+#12  64.92
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 5 secondes
+Redémarrer Arduino après pause
+#13  64.92
+#14  64.92
+#15  64.92
+#16  64.61
+#17  64.61
+commande 'Reset' reçue
+#1  64.61
+#2  64.61
+#3  63.01
+#4  63.01
+#5  63.01
+#6  63.01
+#7  62.30
+#8  62.30
+#9  62.30
+#10  62.30
+#11  63.29
+#12  63.29
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 5 secondes
+Redémarrer Arduino après pause
+#13  63.29
+#14  63.29
+#15  63.29
+#16  67.75
+#17  67.75
+commande 'Reset' reçue
+#1  67.75
+#2  67.75
+#3  65.19
+#4  65.19
+#5  65.19
+#6  65.19
+commande 'Reset' reçue
+#1  64.23
+#2  64.23
+#3  64.23
+#4  64.23
+#5  61.98
+#6  61.98
+#7  61.98
+#8  61.98
+#9  64.04
+#10  64.04
+#11  64.04
+#12  64.04
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 5 secondes
+Redémarrer Arduino après pause
+#13  64.04
+#14  65.31
+#15  65.31
+#16  65.31
+#17  65.31
+commande 'Reset' reçue
+#1  68.21
+#2  68.21
+#3  68.21
+#4  68.21
+#5  67.23
+#6  67.23
+#7  67.23
+#8  67.23
+#9  67.53
+#10  67.53
+#11  67.53
+#12  67.53
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 5 secondes
+Redémarrer Arduino après pause
+#13  67.53
+#14  67.46
+#15  67.46
+#16  67.46
+#17  67.46
+commande 'Reset' reçue
+#1  64.74
+#2  64.74
+#3  64.74
+#4  64.74
+#5  63.87
+#6  63.87
+#7  63.87
+#8  63.87
+#9  62.65
+#10  62.65
+#11  62.65
+#12  62.65
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 5 secondes
+commande 'Arrêter' reçue
+Commande 'Changer Ts' reçue
+La nouvelle valeur est: 6 secondes
+Commande 'Démarrer' reçue
+#1  62.16
+#2  62.16
+#3  62.16
+#4  62.16
+#5  63.90
+#6  63.90
+#7  63.90
+#8  60.94
+#9  60.94
+#10  60.94
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 6 secondes
+Redémarrer Arduino après pause
+#11  62.23
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 6 secondes
+Redémarrer Arduino après pause
+#12  62.23
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 6 secondes
+Redémarrer Arduino après pause
+#13  62.23
+#14  62.23
+#15  62.23
+commande 'Reset' reçue
+#1  67.24
+#2  67.24
+#3  67.24
+#4  67.24
+#5  65.69
+#6  65.69
+#7  65.69
+#8  65.69
+#9  66.25
+#10  66.25
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 5 secondes
+Redémarrer Arduino après pause
+#11  66.25
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 5 secondes
+Redémarrer Arduino après pause
+#12  66.25
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 5 secondes
+Redémarrer Arduino après pause
+#13  66.25
+#14  66.25
+#15  68.70
+#16  68.70
+commande 'Reset' reçue
+#1  68.70
+#2  68.70
+[Done] Closed the serial port 
+
+[Starting] Opening the serial port - /dev/tty.usbserial-130
+Noeud à l'adresse 0x45 prêt à recevoir des commandes
+commande 'Arrêter' reçue
+Commande 'Changer Ts' reçue
+La nouvelle valeur est: 6 secondes
+Commande 'Démarrer' reçue
+#1  0.00
+#2  0.00
+#3  0.00
+#4  0.00
+#5  71.54
+#6  71.54
+commande 'Reset' reçue
+#1  71.54
+#2  67.55
+#3  67.55
+#4  67.55
+#5  67.55
+#6  65.06
+#7  65.06
+#8  65.06
+#9  65.06
+#10  65.87
+#11  65.87
+#12  65.87
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 13 secondes
+Redémarrer Arduino après pause
+#13  65.87
+#14  65.87
+#15  66.52
+#16  66.52
+commande 'Reset' reçue
+#1  66.52
+#2  66.52
+#3  69.76
+#4  69.76
+#5  69.76
+#6  69.76
+#7  70.04
+#8  70.04
+#9  70.04
+#10  70.04
+#11  65.29
+#12  65.29
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 13 secondes
+Redémarrer Arduino après pause
+#13  65.29
+#14  65.29
+#15  65.29
+#16  63.23
+commande 'Reset' reçue
+#1  63.23
+#2  63.23
+#3  63.23
+#4  63.15
+#5  63.15
+#6  63.15
+#7  63.15
+#8  62.93
+#9  62.93
+#10  62.93
+#11  62.93
+#12  61.30
+#13  61.30
+#14  61.30
+#15  61.30
+#16  63.00
+#17  63.00
+#18  63.00
+#19  63.00
+#20  64.26
+#21  64.26
+#22  64.26

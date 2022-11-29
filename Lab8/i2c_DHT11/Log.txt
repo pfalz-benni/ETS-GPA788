@@ -1,0 +1,625 @@
+[Starting] Opening the serial port - /dev/tty.usbmodem1201
+Noeud à l'adresse 0x44 prêt à recevoir des commandes
+commande 'Arrêter' reçue
+Commande 'Changer Ts' reçue
+La nouvelle valeur est: 6 secondes
+Commande 'Démarrer' reçue
+Lecture du DHT11 avec succès
+#1  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#2  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#3  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#4  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#5  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#6  T:21.00
+    H:15.00
+Lecture du DHT11 avec succ��s
+#7  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#8  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#9  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#10  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 6 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#11  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 6 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#12  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 6 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#13  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#14  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#15  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#16  T:21.00
+    H:15.00
+commande 'Reset' reçue
+Lecture du DHT11 avec succ��s
+#1  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#2  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#3  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#4  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#5  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#6  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#7  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#8  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#9  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#10  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#11  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#12  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 5 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#13  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#14  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#15  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#16  T:21.00
+    H:15.00
+commande 'Reset' reçue
+Lecture du DHT11 avec succès
+#1  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#2  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#3  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#4  T:21.00
+    H:15.00
+Lecture du DHT11 avec succ��s
+#5  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#6  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#7  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#8  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#9  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#10  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#11  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#12  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 5 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#13  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#14  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#15  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#16  T:21.00
+    H:15.00
+commande 'Reset' reçue
+Lecture du DHT11 avec succès
+#1  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#2  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#3  T:21.00
+    H:15.00
+commande 'Reset' reçue
+Lecture du DHT11 avec succès
+#1  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#2  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#3  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#4  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#5  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#6  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#7  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#8  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#9  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#10  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#11  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#12  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 5 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#13  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#14  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#15  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#16  T:21.00
+    H:15.00
+commande 'Reset' reçue
+Lecture du DHT11 avec succès
+#1  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#2  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#3  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#4  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#5  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#6  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#7  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#8  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#9  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#10  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#11  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#12  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 5 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#13  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#14  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#15  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#16  T:21.00
+    H:15.00
+commande 'Reset' reçue
+Lecture du DHT11 avec succès
+#1  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#2  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#3  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#4  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#5  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#6  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#7  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#8  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#9  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#10  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#11  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#12  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 5 secondes
+commande 'Arrêter' reçue
+Commande 'Changer Ts' reçue
+La nouvelle valeur est: 6 secondes
+Commande 'Démarrer' reçue
+Lecture du DHT11 avec succès
+#1  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#2  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#3  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#4  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#5  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#6  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#7  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#8  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#9  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#10  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 6 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#11  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 6 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#12  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 6 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#13  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#14  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#15  T:21.00
+    H:15.00
+commande 'Reset' reçue
+Lecture du DHT11 avec succès
+#1  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#2  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#3  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#4  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#5  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#6  T:21.00
+    H:15.00
+Lecture du DHT11 avec succ��s
+#7  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#8  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#9  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#10  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#11  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#12  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 5 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#13  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#14  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#15  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#16  T:21.00
+    H:15.00
+commande 'Reset' reçue
+Lecture du DHT11 avec succès
+#1  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#2  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#3  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#4  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#5  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#6  T:21.00
+    H:15.00
+[Done] Closed the serial port 
+
+[Starting] Opening the serial port - /dev/tty.usbmodem1201
+Noeud à l'adresse 0x44 prêt à recevoir des commandes
+commande 'Arrêter' reçue
+Commande 'Changer Ts' reçue
+La nouvelle valeur est: 6 secondes
+Commande 'Démarrer' reçue
+Lecture du DHT11 avec succès
+#1  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#2  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#3  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#4  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#5  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+
+#6  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#7  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#8  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#9  T:21.00
+
+    H:15.00
+Lecture du DHT11 avec succès
+#10  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 13 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#11  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 13 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#12  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 13 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#13  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#14  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#15  T:21.00
+    H:15.00
+commande 'Reset' reçue
+Lecture du DHT11 avec succès
+#1  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#2  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#3  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#4  T:21.00
+
+    H:15.00
+Lecture du DHT11 avec succès
+#5  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#6  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#7  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#8  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#9  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#10  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#11  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#12  T:21.00
+    H:15.00
+Commande 'Pause' reçue
+Mettre Arduino en pause pendant : 13 secondes
+Redémarrer Arduino après pause
+Lecture du DHT11 avec succès
+#13  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#14  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#15  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#16  T:21.00
+    H:15.00
+commande 'Reset' reçue
+Lecture du DHT11 avec succès
+#1  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+
+#2  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#3  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#4  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#5  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#6  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#7  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#8  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#9  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#10  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#11  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#12  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#13  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#14  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#15  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#16  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#17  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#18  T:21.00
+    H:15.00
+Lecture du DHT11 avec succès
+#19  T:21.00
+    H:15.00
