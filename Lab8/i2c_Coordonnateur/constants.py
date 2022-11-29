@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 # # -*- coding: utf-8 -*-
-'''Des constantes pour le fonctionnement du coordonnateur.
+'''
+constants.py
+Des constantes pour le fonctionnement du coordonnateur.
 
-Ce module fait partie du programme ex_i2c_coord_v[X].py
+Ce module fait partie du programme i2c_coord_test_cmds.py.
 
+Auteurs : Philippe Boivin, Sandrine Bouchard, Alexandre Lins-d'Auteuil,
+Benedikt Franz Witteler
+
+Dans le cadre du cours :
 GPA788 Conception et intégration des objets connectés
 Tony Wong
 Juillet 2020

@@ -1,19 +1,28 @@
-/*  ex_i2cA - Noeud A
+/*  i2c_DHT11.ino - Noeud DHT11
  *  Ce programme est un exemple de communication I2C
- *  entre un coordonnateur (Pi) et un neoud (Arduino).
+ *  entre un coordonnateur (Pi) et un neoud (Arduino) qui lit
+ *  les données du capteur DHT11.
  *  Ce noeud est capable de transférer vers le coordonnateur:
  *
- *    - la valeur de la température interne;
+ *    - la valeur de la température mesuré par le DHT11;
+ *    - la valeur de la humidité mesuré par le DHT11;
  *    - le numéro de l'échantillon.
  *
  *  De plus, le noeud est capable de recevoir les commandes suivantes
  *  du coordonnateur:
- *    - STOP: arrêter l'échantillonnage;
- *    - GO:   démarrer l'échantillonnage.
+ *    - ChangeTs: changer le taux d'échantillonnage
+ *    - Stop: arrêter l'échantillonnage;
+ *    - Go: démarrer l'échantillonnage.
+ *    - Reset: réinitialiser le neud
+ *    - Pause: mettre neud en pause pendant nombre de seconds spécifié
  *
  *  Dans cet exemple, l'arrêt de l'échantillonnage remet à zéro le numéro
  *  de l'échantillon.
+ * 
+ *  Auteurs : Philippe Boivin, Sandrine Bouchard, Alexandre Lins-d'Auteuil,
+ *  Benedikt Franz Witteler
  *
+ *  Dans le cadre du cours :
  *  GPA788 Conception et intégration des objets connectés
  *  T. Wong
  *  06/2018
@@ -77,12 +86,12 @@ float temperature;       // Variable intermédiaire pour mémoriser la températ
 float humidite;          // Variable intermédiaire pour mémoriser la humidite
 uint8_t adrReg;          // Adresse du registre reçue du coordonnateur
 
-volatile CMD cmd; // Go -> échantilloner, Stop -> arrêter
+volatile CMD cmd;        // Dernière commande reçue
 
 uint32_t wakeUpTime = -1; // Temps à reveiller l'Arduino après commande pause
 
-const uint8_t MIN_TS_SEC{5};   // Période d'échantillonnage min (sec)
-const uint8_t MAX_TS_SEC{200}; // Période d'échantillonnage max (sec)
+const uint8_t MIN_TS_SEC{5};   // Période de pause min (sec)
+const uint8_t MAX_TS_SEC{200}; // Période de pause max (sec)
 
 const uint8_t MIN_PAUSE_SEC{5};      // Période d'échantillonnage min (sec)
 const uint8_t MAX_PAUSE_SEC{100000}; // Période d'échantillonnage max (sec)
@@ -203,7 +212,7 @@ void i2c_receiveEvent(int n)
     {
     case static_cast<uint8_t>(CMD::Stop):
       cmd = CMD::Stop;
-      Serial.println(F("commande 'Arrêter' reçue"));
+      Serial.println(F("Commande 'Arrêter' reçue"));
       break;
     case static_cast<uint8_t>(CMD::Go):
       cmd = CMD::Go;
@@ -213,7 +222,7 @@ void i2c_receiveEvent(int n)
     case static_cast<uint8_t>(CMD::Reset):
       // cmd n'est pas mise à CMD::Reset parce que l'execution
       // doit continuer comme avant après Reset
-      Serial.println(F("commande 'Reset' reçue"));
+      Serial.println(F("Commande 'Reset' reçue"));
       // Reset tout
       cr.champs.Ts = MIN_TS_SEC;
       cr.champs.nb_echantillons = 0;

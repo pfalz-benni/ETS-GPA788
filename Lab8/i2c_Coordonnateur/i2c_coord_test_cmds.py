@@ -1,22 +1,31 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-'''Ce programme réalise le côté coordonnateur d'une communication I2C.
+'''
+i2c_coord_test_cmds.py - Coordonnateur
+Ce programme réalise le côté coordonnateur d'une communication I2C.
 
-Version du programme ex_i2c_coord gérant deux (2) noeuds. La gestion
+Cette version du programme gère deux (2) noeuds. La gestion
 des exceptions/erreurs repose sur le style orienté-objet de Python.
 
 Contexte
 -=-=-==-
 Dans cet exemple, les noeuds (Arduino) effectuent:
-  1) la lecture de la température du CPU;
-  2) incrémenter le numéro d'échantillon.
+  1) DHT11 :
+    - la lecture de la température mesuré par le DHT11;
+    - la lecture de la humidité mesuré par le DHT11;
+    - l'incrémentation du numéro de l'échantillon.
+  2) Leq :
+    - la lecture du niveau d'exposition sonore (Leq)
+    - l'incrémentation du numéro de l'échantillon.
 selon la période d'échantillonnage NEW_TS programmé par le coordonnateur (Pi).
 À toutes les SAMPLING_TIME, le coordonnateur lit ces deux valeurs des noeuds
 et les affiche à la sortie standard (terminal Python). On a NEW_TS != SAMPLE_TIME
 pour montrer l'asynchronisme entre les noeuds et le coordonnateur.
 
-(voir les notes de cours "I2C: Pi et Arduino")
+Auteurs : Philippe Boivin, Sandrine Bouchard, Alexandre Lins-d'Auteuil,
+Benedikt Franz Witteler
 
+Dans le cadre du cours :
 GPA788 Conception et intégration des objets connectés
 T. Wong
 Juin 2018
