@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 '''
-i2c_coord_test_cmds.py - Coordonnateur
+i2c_coord.py - Coordonnateur
 Ce programme réalise le côté coordonnateur d'une communication I2C.
 
 Cette version du programme gère deux (2) noeuds. La gestion
