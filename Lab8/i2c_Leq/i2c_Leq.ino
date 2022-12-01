@@ -38,12 +38,12 @@
    Globales pour la classe Calculateur_Leq
    ------------------------------------------------------------------ */
 
-const uint32_t TS{62};        // Péruide d'échantillionnage (ms)
+const uint32_t TS_INIT{62};   // Péruide d'échantillionnage (ms) initiale
 const uint16_t NB_SAMPLE{32}; // 32 x 62 ms ~ 2 secondes
-const uint16_t NB_LI{10};     // 150 x 2 secondes = 5 minutes (*) // TODO Reset to 150
+const uint16_t NB_LI{150};     // 150 x 2 secondes = 5 minutes (*) // TODO Reset to 150
 
 // Créer un objet de type Leq
-Calculateur_Leq leq(TS, NB_SAMPLE, NB_LI);
+Calculateur_Leq leq(TS_INIT, NB_SAMPLE, NB_LI);
 
 /* ------------------------------------------------------------------
    Globales pour la communication I2C
@@ -84,7 +84,7 @@ union CarteRegistres cr; // Une carte des registres
 float Leq;               // Variable intermédiaire pour mémoriser la Leq
 uint8_t adrReg;          // Adresse du registre reçue du coordonnateur
 
-volatile CMD cmd;        // Dernière commande reçue
+volatile CMD cmd; // Dernière commande reçue
 
 uint32_t wakeUpTime = -1; // Temps à reveiller l'Arduino après commande pause
 
@@ -108,14 +108,14 @@ void setup()
   waitUntil(2000);
 
   // Initialiser les champs de la carte des registres
-  cr.champs.Ts = MIN_TS_SEC;
+  cr.champs.Ts = TS_INIT;
   cr.champs.nb_echantillons = 0;
   cr.champs.Leq = -1;
   Leq = -1;
 
   // Initialiser les variables de contrôle de la
   // communication I2C
-  cmd = CMD::Stop;
+  cmd = CMD::Stop; //---------------------------- TODO
   adrReg = -1;
   // Réglage de la bibliothèque Wire pour le I2C
   Wire.begin(ADR_NOEUD);
@@ -136,21 +136,18 @@ void setup()
 void loop()
 {
   // Lire Leq interne si la commande est Go et le temps cr.champs.Ts
-  // est écoulé depuis la dernière lecutre
-  static unsigned long start = millis();
+  // est écoulé depuis la dernière lecutre (indiqué par la valeur de
+  // retour de leq.Compute())
 
   if (cmd == CMD::Go)
   {
     // L'objet leq "sait" à quel moment il doit accumuler les valeurs
-    // du signal sonore. Accumulate est applé toujours alors
+    // du signal sonore. Accumulate est applé toujours alors.
     leq.Accumulate();
-    // L'objet leq sait à quels moments il faut calculer Vrms, Li et Leq
-    leq.Compute();
 
-    if (millis() - start >= cr.champs.Ts * 1000)
+    if (leq.Compute())
+    // ... L'objet leq sait à quels moments il faut calculer Vrms, Li et Leq
     {
-      start = millis();
-
       Leq = leq.GetLeq();
 
       // Section critique: empêcher les interruptions lors de l'assignation
@@ -240,9 +237,20 @@ void i2c_receiveEvent(int n)
     {
       Serial.println(F("Commande 'Changer Ts' reçue"));
       cr.champs.Ts = data2;
+      leq.SetTs((uint32_t)data2);
       Serial.print(F("La nouvelle valeur est: "));
       Serial.print(cr.champs.Ts);
       Serial.println(F(" secondes"));
+
+      Serial.print(F("Nouveau tp = ts * nbVrmsSamples * nbLiSamples = "));
+      Serial.print(leq.GetTs());
+      Serial.print(F(" * "));
+      Serial.print(leq.GetVrmSamples() / 1000.0);
+      Serial.print(F(" * "));
+      Serial.print(leq.GetLiSamples());
+      Serial.print(F(" s = "));
+      Serial.print((leq.GetTs() * leq.GetVrmSamples() / 1000.0) * leq.GetLiSamples() / 60.0);
+      Serial.println(F(" min"));
     }
     else if ((data1 == static_cast<uint8_t>(CMD::Pause)) && (data2 >= MIN_PAUSE_SEC) && (data2 <= MAX_PAUSE_SEC))
     {

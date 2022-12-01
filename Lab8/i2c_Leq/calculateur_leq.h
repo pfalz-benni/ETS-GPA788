@@ -53,6 +53,8 @@ public:
     inline uint16_t GetVrmSamples() const { return m_nbSample; }
     inline uint16_t GetLiSamples() const { return m_nbLi; }
 
+    inline uint32_t SetTs(uint32_t ts) { m_ts = ts; }
+
     /* -------------------------------------------------------------
        Services publics offerts
        -------------------------------------------------------------- */
