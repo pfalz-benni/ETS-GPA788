@@ -1,5 +1,5 @@
 {
     "board": "arduino:avr:uno",
     "sketch": "i2c_Leq.ino",
-    "port": "/dev/tty.usbserial-130"
+    "port": "/dev/tty.usbserial-120"
 }
